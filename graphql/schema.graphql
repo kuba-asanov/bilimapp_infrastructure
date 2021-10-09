@@ -1,0 +1,120 @@
+type Article @aws_api_key @aws_cognito_user_pools {
+  articleType: ArticleType!
+  author: String!
+  category: String!
+  contents: [Content]
+  createDate: AWSTimestamp!
+  heroMedia: MediaFile!
+  id: ID!
+  synopsis: String!
+  title: String!
+}
+
+type Content {
+  type: ContentType!
+  data: String!
+}
+
+input ContentInput {
+  type: ContentType!
+  data: String!
+}
+
+type MediaFile {
+  imageUrl: AWSURL
+  fullVideoUrl: AWSURL
+}
+
+input MediaFileInput {
+  imageUrl: AWSURL
+  fullVideoUrl: AWSURL
+}
+
+enum ArticleType {
+  CLIPPED_CARD
+  OVERLAYED_CARD
+}
+
+enum ContentType {
+  IMAGE
+  MARKDOWN
+  YOUTUBE
+}
+
+input CreateArticleInput {
+  id: ID
+  articleType: ArticleType!
+  author: String
+  category: String
+  contents: [ContentInput]
+  heroMedia: MediaFileInput
+  synopsis: String
+  title: String!
+}
+
+input ArticleClinicInput {
+  id: ID!
+}
+
+input ArticlePhysicianInput {
+  id: ID!
+}
+
+input UpdateArticleInput {
+  articleType: ArticleType
+  author: String
+  category: String
+  contents: [ContentInput]
+  heroMedia: MediaFileInput
+  id: ID!
+  synopsis: String
+  title: String
+}
+
+type ListArticlesResponse {
+  total: Int!
+  articles: [Article]
+}
+
+input DeleteArticleInput {
+  id: ID!
+}
+
+input GetArticleInput {
+  id: ID!
+}
+
+input ListArticlesInput {
+  from: Int
+  query: String
+  size: Int
+}
+
+input ArticlesByCategoryInput {
+  category: String!
+}
+
+type Query {
+  getArticle(input: GetArticleInput!): Article!
+    @aws_api_key
+    @aws_cognito_user_pools
+  listArticles(input: ListArticlesInput): ListArticlesResponse!
+    @aws_api_key
+    @aws_cognito_user_pools
+  articlesByCategory(input: ArticlesByCategoryInput!): ListArticlesResponse!
+    @aws_api_key
+    @aws_cognito_user_pools
+}
+
+type Mutation {
+  createArticle(input: CreateArticleInput!): Article!
+    @aws_cognito_user_pools(cognito_groups: ["Admin"])
+  updateArticle(input: UpdateArticleInput!): Article!
+    @aws_cognito_user_pools(cognito_groups: ["Admin"])
+  deleteArticle(input: DeleteArticleInput!): ID!
+    @aws_cognito_user_pools(cognito_groups: ["Admin"])
+}
+
+type Subscription {
+  onCreateArticle: Article @aws_subscribe(mutations: ["createArticle"])
+}
