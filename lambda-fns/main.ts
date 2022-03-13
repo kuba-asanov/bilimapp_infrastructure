@@ -1,4 +1,5 @@
 import createArticle from './createArticle';
+import deleteArticle from './deleteArticle';
 import getArticle from './getArticle';
 import listArticles from './listArticlesFromDDB';
 
@@ -28,7 +29,7 @@ exports.handler = async (event: AppSyncEvent) => {
     case 'createArticle':
       return await createArticle(params);
       case 'deleteArticle':
-        return await listArticles(params);
+        return await deleteArticle(params);
     // case 'articlesByCategory':
     //   return await listArticles(params);
     // case 'updateArticle':
