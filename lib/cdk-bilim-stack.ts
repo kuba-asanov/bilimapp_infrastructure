@@ -94,6 +94,7 @@ export class CdkBilimStack extends cdk.Stack {
 
     const articleTable = new ddb.Table(this, 'CDKArticleTable', {
       billingMode: ddb.BillingMode.PAY_PER_REQUEST,
+      tableName: "Articles",
       partitionKey: {
         name: 'id',
         type: ddb.AttributeType.STRING,

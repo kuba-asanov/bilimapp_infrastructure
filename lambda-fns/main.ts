@@ -28,7 +28,7 @@ exports.handler = async (event: AppSyncEvent) => {
       return await listArticles(params);
     case 'createArticle':
       return await createArticle(params);
-      case 'deleteArticle':
+    case 'deleteArticle':
         return await deleteArticle(params);
     // case 'articlesByCategory':
     //   return await listArticles(params);
