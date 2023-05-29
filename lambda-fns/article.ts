@@ -6,7 +6,7 @@ export type Article = {
   createDate: number;
   heroMedia?: MediaFile;
   id: ID;
-  synopsis: string;
+  description: string;
   title: string;
 };
 
@@ -16,9 +16,7 @@ interface Content {
 }
 
 export enum ContentType {
-  IMAGE = 'IMAGE',
-  MARKDOWN = 'MARKDOWN',
-  YOUTUBE = 'YOUTUBE',
+  BIG = 'BIG',
 }
 
 interface MediaFile {

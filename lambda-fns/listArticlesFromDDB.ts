@@ -20,7 +20,7 @@ export default async function listArticles({
     TableName: process.env.ARTICLE_TABLE,
     Limit: size,
     ProjectionExpression:
-      'articleType, author, category, clinic, contents, createDate, heroMedia, id, physician, synopsis, title',
+      'articleType, author, category, contents, createDate, heroMedia, id, description, title',
   };
 
   /// Code for searching by title, category, contents from DB

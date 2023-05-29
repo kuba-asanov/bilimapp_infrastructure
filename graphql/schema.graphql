@@ -1,12 +1,12 @@
 type Article @aws_api_key @aws_cognito_user_pools {
-  articleType: ArticleType!
-  author: String!
+  articleType: ArticleType
+  author: String
   category: String!
   contents: [Content]
   createDate: AWSTimestamp!
-  heroMedia: MediaFile!
+  heroMedia: MediaFile
   id: ID!
-  synopsis: String!
+  description: String
   title: String!
 }
 
@@ -31,8 +31,7 @@ input MediaFileInput {
 }
 
 enum ArticleType {
-  CLIPPED_CARD
-  OVERLAYED_CARD
+  BIG
 }
 
 enum ContentType {
@@ -48,7 +47,7 @@ input CreateArticleInput {
   category: String
   contents: [ContentInput]
   heroMedia: MediaFileInput
-  synopsis: String
+  description: String
   title: String!
 }
 
@@ -67,7 +66,7 @@ input UpdateArticleInput {
   contents: [ContentInput]
   heroMedia: MediaFileInput
   id: ID!
-  synopsis: String
+  description: String
   title: String
 }
 
